@@ -1,15 +1,9 @@
-# Basic Sample Hardhat Project
+# NFTCollection with React webapp to mint them
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
+I created a simple NFT smartcontract that mints up to 50 NFTs with a combination of random words on chain. I also implemented a react application where one can mint these NFTs.
 
-Try running some of the following tasks:
+![image](https://user-images.githubusercontent.com/69682837/136935749-9d16590b-75fe-42b4-9f4f-c65dee303833.png)
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+OpenSea: https://testnets.opensea.io/collection/lucarionft-v4
+
+This was done with the help of buildspace Bootcamp
