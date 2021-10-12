@@ -20,6 +20,8 @@ contract MyEpicNFT is ERC721URIStorage {
     string[] secondWords = ["Mega", "Ultra", "Super"];
     string[] thirdWords = ["Combo", "Slide", "Punch", "Kick"];
 
+    event NewNFTMinted(address sender, uint256 tokenId);
+
     constructor() ERC721 ("LucarioNFT" , "LUCA") {
         console.log("This is my NFT contract!");
     }
@@ -28,9 +30,18 @@ contract MyEpicNFT is ERC721URIStorage {
         require(number > 0 && number < 4);
         _;
     }
+    
+    modifier canMintNewNFT(){
+        require(_tokenIds.current() < 50);
+        _;
+    }
 
     function random(string memory input) internal pure returns(uint256){
         return uint256(keccak256(abi.encodePacked(input)));
+    }
+
+    function numberOfMintedNFTS() public view returns(uint256){
+        return(_tokenIds.current());
     }
 
     function pickRandomWord(uint256 tokenId, uint256 wordNumber) public view validWordNumber(wordNumber) returns (string memory){
@@ -51,7 +62,7 @@ contract MyEpicNFT is ERC721URIStorage {
         }
     }
 
-    function makeNFT() public {
+    function makeNFT() public canMintNewNFT {
         uint256 newItemId = _tokenIds.current();
 
         string memory first = pickRandomWord(newItemId, 1);
@@ -87,5 +98,6 @@ contract MyEpicNFT is ERC721URIStorage {
         _setTokenURI(newItemId, finalTokenUri);
         console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
         _tokenIds.increment();
+        emit NewNFTMinted(msg.sender, newItemId);
     }
 }
